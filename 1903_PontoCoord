@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class PontoCoordenadas {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+
+        System.out.print("Digite as coordenadas do ponto 1 (x1 y1): ");
+        double x1 = scanner.nextDouble();
+        double y1 = scanner.nextDouble();
+
+
+        System.out.print("Digite as coordenadas do ponto 2 (x2 y2): ");
+        double x2 = scanner.nextDouble();
+        double y2 = scanner.nextDouble();
+
+
+        String tipoLinha = determinarTipoLinha(x1, y1, x2, y2);
+
+
+        System.out.println("A linha entre os pontos é: " + tipoLinha);
+
+
+        System.out.println("Ponto 1 está no: " + determinarQuadrante(x1, y1));
+        System.out.println("Ponto 2 está no: " + determinarQuadrante(x2, y2));
+
+        scanner.close();
+    }
+
+
+    public static String determinarTipoLinha(double x1, double y1, double x2, double y2) {
+        if (x1 == x2) {
+            return "reta vertical";
+        } else if (y1 == y2) {
+            return "reta horizontal";
+        } else {
+            return "reta inclinada";
+        }
+    }
+
+
+    public static String determinarQuadrante(double x, double y) {
+        if (x > 0 && y > 0) {
+            return "Quadrante I";
+        } else if (x < 0 && y > 0) {
+            return "Quadrante II";
+        } else if (x < 0 && y < 0) {
+            return "Quadrante III";
+        } else if (x > 0 && y < 0) {
+            return "Quadrante IV";
+        } else if (x == 0 && y != 0) {
+            return "na linha Y";
+        } else if (y == 0 && x != 0) {
+            return "na linha X";
+        } else {
+            return "na origem";
+        }
+    }
+}
