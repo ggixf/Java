@@ -1,5 +1,5 @@
 CREATE TABLE cliente (
-    ID_cliente INT PRIMARY KEY AUTO_INCREMENT,
+    Id_cliente INT PRIMARY KEY AUTO_INCREMENT,
     Nome VARCHAR(100) NOT NULL,
     CPF CHAR(11) UNIQUE NOT NULL,
     Email VARCHAR(100) UNIQUE,
@@ -24,8 +24,8 @@ CREATE TABLE publicacoes (
     nota_avaliacao DECIMAL(2,1),
     link_imagem VARCHAR(255),
     id_categoria INT NOT NULL,
-    FOREIGN KEY (id_prestador) REFERENCES cliente(ID_cliente),
-    FOREIGN KEY (id_categoria) REFERENCES categorias(id)
+    FOREIGN KEY (id_prestador) REFERENCES cliente(Id_cliente),
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
 );
 
 SELECT * FROM cliente;
