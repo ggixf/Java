@@ -1,0 +1,31 @@
+CREATE TABLE cliente (
+    ID_cliente INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(100) NOT NULL,
+    CPF CHAR(11) UNIQUE NOT NULL,
+    Email VARCHAR(100) UNIQUE,
+    Cep CHAR(8) NOT NULL,
+    Tipo VARCHAR(9)
+);
+
+INSERT INTO cliente (Nome, CPF, Email, Cep, Tipo)
+VALUES ('Maria Oliveira', '12345678901', 'maria@email.com', '13332562', 'prestador');
+
+CREATE TABLE categorias (
+    id_categoria INT PRIMARY KEY AUTO_INCREMENT,
+    nome_categoria VARCHAR(25) NOT NULL
+    
+);
+
+CREATE TABLE publicacoes (
+    id_publicacao INT PRIMARY KEY AUTO_INCREMENT,
+    id_prestador INT NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    descricao TEXT NOT NULL,
+    nota_avaliacao DECIMAL(2,1),
+    link_imagem VARCHAR(255),
+    id_categoria INT NOT NULL,
+    FOREIGN KEY (id_prestador) REFERENCES cliente(ID_cliente),
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id)
+);
+
+SELECT * FROM cliente;
