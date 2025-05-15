@@ -1,15 +1,32 @@
-CREATE TABLE cliente (
-    Id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE usuario (
+    Id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     Nome VARCHAR(100) NOT NULL,
     CPF CHAR(11) UNIQUE NOT NULL,
     Email VARCHAR(100) UNIQUE,
     Cep CHAR(8) NOT NULL,
-    Tipo VARCHAR(9)
+    Tipo INT
 );
 
-INSERT INTO cliente (Nome, CPF, Email, Cep, Tipo)
-VALUES ('Maria Oliveira', '12345678901', 'maria@email.com', '13332562', 'prestador');
+INSERT INTO usuario (Id_usuario, Nome, CPF, Email, Cep, Tipo) VALUES
+(1, 'João Silva', '12345678901', 'joao.silva@email.com', '12345678', 1),
+(2, 'Maria Oliveira', '23456789012', 'maria.oliveira@email.com', '23456789', 2),
+(3, 'Carlos Pereira', '34567890123', 'carlos.pereira@email.com', '34567890', 1),
+(4, 'Ana Souza', '45678901234', 'ana.souza@email.com', '45678901', 2),
+(5, 'Fernanda Lima', '56789012345', 'fernanda.lima@email.com', '56789012', 1);
 
+create table tipo (
+  id_tipo int primary key,
+  descricao varchar (20));
+
+INSERT INTO tipo (id_tipo, descricao) VALUES
+(1, 'Prestador'),
+(2, 'Cliente'),
+
+SELECT us.Nome, us.CPF, ti.descricao
+from usuario us, tipo ti
+WHERE ti.id_tipo = us.Tipo
+  and ti.descricao = 'Prestador'
+  
 CREATE TABLE categorias (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
     nome_categoria VARCHAR(25) NOT NULL
@@ -24,8 +41,19 @@ CREATE TABLE publicacoes (
     nota_avaliacao DECIMAL(2,1),
     link_imagem VARCHAR(255),
     id_categoria INT NOT NULL,
-    FOREIGN KEY (id_prestador) REFERENCES cliente(Id_cliente),
+    FOREIGN KEY (id_prestador) REFERENCES usuario(Id_usuario),
     FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
 );
 
-SELECT * FROM cliente;
+INSERT INTO publicacoes (id_prestador, titulo, descricao, nota_avaliacao, link_imagem, id_categoria) VALUES
+(1, 'Reparo de Encanamento', 'Serviço de reparo completo em encanamento residencial, incluindo troca de peças e vedação.', 4.5, 'https://exemplo.com/encanamento.jpg', 2),
+
+(2, 'Instalação de Ar-condicionado', 'Instalação segura e eficiente de aparelhos de ar-condicionado split e janela.', 4.8, 'https://exemplo.com/ar-condicionado.jpg', 3),
+
+(3, 'Pintura Residencial', 'Pintura interna e externa com acabamento profissional. Cores à sua escolha.', 4.2, 'https://exemplo.com/pintura.jpg', 1),
+
+(1, 'Limpeza Pós-Obra', 'Limpeza profunda e detalhada após reforma ou construção.', 4.0, 'https://exemplo.com/limpeza.jpg', 4),
+
+(4, 'Manutenção Elétrica', 'Correção de falhas elétricas, troca de disjuntores e instalação de tomadas.', 4.7, 'https://exemplo.com/eletrica.jpg', 2);
+
+
